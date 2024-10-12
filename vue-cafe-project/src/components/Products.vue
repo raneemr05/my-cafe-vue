@@ -1,9 +1,21 @@
 <script setup>
+import ItemsLayout from './ItemsLayout.vue';
+
 defineProps({
     items: Array
 });
 
-import ItemsLayout from './ItemsLayout.vue';
+// Kebab-case is the recommended naming convention for emit  
+// Deining the event emitter, specifying that this component can emit an 'add-to-cart' event
+const emit = defineEmits(['add-to-cart']);
+
+// Function triggered when the 'Add to Cart' button is clicked
+function addToCart(item){
+    //Emits the 'add-to-cart' event to the parent component along with the item
+    emit('add-to-cart', item);
+    // Log message to confirm the event was emitted to the parent
+    console.log(item.name + ' event emitted from the child');
+}
 </script>
 
 <template>
@@ -14,7 +26,6 @@ import ItemsLayout from './ItemsLayout.vue';
             <!-- <li v-for="item in items" :key="item.id">
                 {{ item.name }} - {{ item.price }} - {{ item.img }}
             </li> -->
-
             <!-- Items list displayed with slots layout-->
             <ItemsLayout v-for="item in items" :key="item.id">
                 <!-- # is used in replacement of v-slot -->
@@ -28,7 +39,7 @@ import ItemsLayout from './ItemsLayout.vue';
                     ${{ item.price }}
                 </template>
                 <template #actions>
-                    <button> Add to cart </button>
+                    <button @click="addToCart(item)"> Add to cart </button>
                 </template>
             </ItemsLayout>
         </ul>
@@ -37,27 +48,28 @@ import ItemsLayout from './ItemsLayout.vue';
 </template>
 
 <style scoped>
-.container{
-    background-color: #777;
+.container {
+    background-color: #999;
     padding: 20px;
     color: black;
 }
 
-ul{
+ul {
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
-.menuImg{
-    width:120px;
-    height:120px;
+.menuImg {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     border: 2px solid brown;
     margin-bottom: 10px
 }
 
-.menuImg:hover{
+.menuImg:hover {
     border: 4px solid brown;
 }
 </style>

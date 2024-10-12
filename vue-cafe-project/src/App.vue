@@ -16,6 +16,16 @@ const items =  ref([
   { id: 6, name: 'Special TDG ', price: 5, img: 'https://bakerbynature.com/wp-content/uploads/2024/01/Hot-Chocolate-3.jpg' }
 ]);
 
+// An array to store the cart values
+const cart = ref([]);
+
+function addToCart(product){
+  // Push items in to the cart array
+  cart.value.push(product);
+  console.log(product.name + " for $ " + product.price + 
+  " added to the cart successfully");
+}
+
 </script>
 
 <template>
@@ -27,8 +37,9 @@ const items =  ref([
 
     <!-- Passing dynamic data as props -->
      <Header :brand :location></Header>
+     <h2 style="text-align: center;"> Cart: {{ cart.length }} item(s)</h2>
      <!-- Passing an array of objects as props -->
-     <Products :items></Products>
+     <Products :items @add-to-cart="addToCart"></Products>
      <Footer :brand></Footer>
 
   </div>

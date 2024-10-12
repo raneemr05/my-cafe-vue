@@ -11,10 +11,17 @@ defineProps({
 
 <template>
     <div class="container">
-        <p> {{ brand }}</p>
+        <p> &copy; 2024 {{ brand }}</p> | 
         <p> {{ location }} </p>
-
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    padding:20px
+}
+</style>

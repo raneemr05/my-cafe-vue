@@ -1,16 +1,20 @@
 <script setup>
 import ItemsLayout from './ItemsLayout.vue';
+import { useCartStore } from '@/stores/AddToCartStore';
 
 defineProps({
     items: Array
 });
 
+const cartStore = useCartStore();
 // Kebab-case is the recommended naming convention for emit  
 // Deining the event emitter, specifying that this component can emit an 'add-to-cart' event
 const emit = defineEmits(['add-to-cart']);
 
 // Function triggered when the 'Add to Cart' button is clicked
 function addToCart(item){
+    // Add the item to the cart in pinia store
+    cartStore.addToCart(item);
     //Emits the 'add-to-cart' event to the parent component along with the item
     emit('add-to-cart', item);
     // Log message to confirm the event was emitted to the parent

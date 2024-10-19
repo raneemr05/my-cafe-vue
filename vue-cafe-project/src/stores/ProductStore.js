@@ -13,7 +13,13 @@ const items =  ref([]);
     const data = await response.json();
     items.value = data.products;
   })
-  return { items};
+
+  const addProduct = (product) =>{
+    items.value.push({ ...product, id: items.value.length + 1});
+    console.log(items);
+  }
+
+  return { items, addProduct};
 
 
 });

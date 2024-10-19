@@ -49,6 +49,18 @@ export function makeServer() {
       this.get("/products", () => {
         return { products };
       });
+
+      //POST request handler to add a new product
+      // schema is part of Mirge JS's routing API and is required for proper functioning
+      this.post("/addProducts", (schema, request) =>{
+        const newProduct = JSON.parse(request.requestBody);
+        newProduct.id = products.length + 1; // increment the id or Math.random() for dynamic id values
+        //Push the new product to the mock server data 
+        products.push(newProduct);
+        //Pushing the newly created product object into products array
+        return {product: newProduct};
+      });
+
     },
   });
   return server;

@@ -1,6 +1,7 @@
 <script setup>
 import { useProductStore } from '@/stores/ProductStore';
 import ProductList from '@/components/ProductList.vue';
+import AddProduct from '@/components/AddProduct.vue';
 
 // Access the product store
 const productStore = useProductStore();
@@ -34,6 +35,7 @@ const productStore = useProductStore();
             day! </p>
 
             <ProductList v-bind:items= "productStore.items"></ProductList>
+            <AddProduct></AddProduct>
     </div>
 
 </template>
